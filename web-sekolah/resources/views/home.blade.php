@@ -126,7 +126,7 @@
             </article>
         </div>
     </section>
-
+//menambah fitur informasi terbaru
     {{-- ===================== INFORMASI ===================== --}}
     <section id="informasi" class="section section-alt">
         <div class="section-head">
