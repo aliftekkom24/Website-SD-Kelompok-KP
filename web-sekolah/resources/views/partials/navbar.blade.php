@@ -35,9 +35,9 @@
             <li class="dropdown">
                 <a href="#kesiswaan">Kesiswaan</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#ekstrakurikuler">Ekstrakurikuler</a></li>
-                    <li><a href="#prestasi">Prestasi Siswa</a></li>
-                    <li><a href="#tata-tertib">Tata Tertib</a></li>
+                    <li><a href="{{ route('kesiswaan.ekstrakurikuler') }}">Ekstrakurikuler</a></li>
+                    <li><a href="{{ route('kesiswaan.prestasi') }}">Prestasi Siswa</a></li>
+                    <li><a href="{{ route('kesiswaan.tata-tertib') }}">Tata Tertib</a></li>
                 </ul>
             </li>
 

@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
+<<<<<<< Updated upstream
+=======
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\KesiswaanController;
+>>>>>>> Stashed changes
 
 Route::get('/', function () {
     if (auth()->check()) {
@@ -36,6 +41,7 @@ Route::prefix('profil')->name('profil.')->group(function () {
     })->name('fasilitas');
 });
 
+<<<<<<< Updated upstream
 Route::prefix('akademik')->name('akademik.')->group(function () {
     Route::get('kalender', function () {
         // Data kalender akademik — nantinya bisa diambil dari database lewat dashboard admin.
@@ -110,6 +116,12 @@ Route::prefix('akademik')->name('akademik.')->group(function () {
             'blok' => $blok,
         ]);
     })->name('kurikulum');
+=======
+Route::prefix('kesiswaan')->name('kesiswaan.')->group(function () {
+    Route::get('ekstrakurikuler', [KesiswaanController::class, 'ekstrakurikuler'])->name('ekstrakurikuler');
+    Route::get('prestasi', [KesiswaanController::class, 'prestasi'])->name('prestasi');
+    Route::get('tata-tertib', [KesiswaanController::class, 'tataTertib'])->name('tata-tertib');
+>>>>>>> Stashed changes
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
