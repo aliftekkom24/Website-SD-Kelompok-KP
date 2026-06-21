@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Berita;
+use App\Models\Galeri;
 use App\Models\Pengumuman;
 use Illuminate\Database\Seeder;
 
@@ -17,6 +18,7 @@ class InformasiSeeder extends Seeder
         // Bersihkan dulu agar tidak menumpuk bila di-seed berulang.
         Berita::truncate();
         Pengumuman::truncate();
+        Galeri::truncate();
 
         // ── BERITA ──
         $berita = [
@@ -90,6 +92,55 @@ class InformasiSeeder extends Seeder
         ];
         foreach ($pengumuman as $p) {
             Pengumuman::create($p);
+        }
+
+        // ── GALERI FOTO ──
+        // Kolom gambar dibiarkan kosong agar kartu memakai placeholder; admin tinggal
+        // mengunggah foto (path storage) atau menempelkan URL gambar lewat dashboard.
+        $galeri = [
+            [
+                'judul' => 'Upacara Hari Pendidikan Nasional',
+                'kategori' => 'Kegiatan', 'urutan' => 1, 'tanggal' => '2026-05-02',
+                'keterangan' => 'Upacara bendera dalam rangka memperingati Hari Pendidikan Nasional yang diikuti seluruh siswa, guru, dan staf SDN Dadapsari.',
+            ],
+            [
+                'judul' => 'Penyerahan Piala Juara KSN Matematika',
+                'kategori' => 'Prestasi', 'urutan' => 2, 'tanggal' => '2026-03-16',
+                'keterangan' => 'Momen penyerahan piala kepada Aisyah Putri Ramadhani (kelas 5A) yang meraih Juara 1 KSN Matematika tingkat kota.',
+            ],
+            [
+                'judul' => 'Latihan Rutin Ekstrakurikuler Pramuka',
+                'kategori' => 'Ekstrakurikuler', 'urutan' => 3, 'tanggal' => '2026-04-18',
+                'keterangan' => 'Kegiatan latihan rutin Pramuka setiap hari Jumat di lapangan sekolah, melatih kemandirian dan kedisiplinan siswa.',
+            ],
+            [
+                'judul' => 'Penampilan Seni Tari pada Pentas Seni',
+                'kategori' => 'Ekstrakurikuler', 'urutan' => 4, 'tanggal' => '2026-04-05',
+                'keterangan' => 'Penampilan tari kreasi oleh sanggar tari sekolah pada acara pentas seni akhir semester.',
+            ],
+            [
+                'judul' => 'Kegiatan Jumat Bersih dan Penghijauan',
+                'kategori' => 'Kegiatan', 'urutan' => 5, 'tanggal' => '2026-04-25',
+                'keterangan' => 'Gotong royong membersihkan lingkungan sekolah sekaligus menanam pohon di area halaman sekolah.',
+            ],
+            [
+                'judul' => 'Suasana Perpustakaan Sekolah',
+                'kategori' => 'Fasilitas', 'urutan' => 6, 'tanggal' => '2026-02-10',
+                'keterangan' => 'Perpustakaan sekolah yang nyaman menjadi tempat favorit siswa untuk membaca dan belajar.',
+            ],
+            [
+                'judul' => 'Kunjungan Edukatif ke Museum Kota',
+                'kategori' => 'Kegiatan', 'urutan' => 7, 'tanggal' => '2026-02-12',
+                'keterangan' => 'Siswa kelas 4 dan 5 mengikuti kunjungan edukatif untuk mengenal sejarah dan budaya daerah secara langsung.',
+            ],
+            [
+                'judul' => 'Tim Futsal Sekolah Juara 2 Antar-SD',
+                'kategori' => 'Prestasi', 'urutan' => 8, 'tanggal' => '2026-01-30',
+                'keterangan' => 'Tim futsal SDN Dadapsari meraih Juara 2 pada turnamen antar-SD tingkat kota.',
+            ],
+        ];
+        foreach ($galeri as $g) {
+            Galeri::create($g);
         }
     }
 }

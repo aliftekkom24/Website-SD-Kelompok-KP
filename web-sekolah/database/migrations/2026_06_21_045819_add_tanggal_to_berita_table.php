@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('berita', function (Blueprint $table) {
-            $table->date('tanggal')->nullable()->after('penulis');
-        });
+        // Kolom "tanggal" sudah dibuat di migrasi create_berita_table; lewati bila sudah ada.
+        if (! Schema::hasColumn('berita', 'tanggal')) {
+            Schema::table('berita', function (Blueprint $table) {
+                $table->date('tanggal')->nullable()->after('penulis');
+            });
+        }
     }
 
     /**
@@ -21,8 +24,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('berita', function (Blueprint $table) {
-            $table->dropColumn('tanggal');
-        });
+        if (Schema::hasColumn('berita', 'tanggal')) {
+            Schema::table('berita', function (Blueprint $table) {
+                $table->dropColumn('tanggal');
+            });
+        }
     }
 };

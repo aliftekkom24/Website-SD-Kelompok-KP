@@ -46,7 +46,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="{{ route('informasi.index') }}">Berita &amp; Pengumuman</a></li>
                     <li><a href="{{ route('ppdb.index') }}">PPDB</a></li>
-                    <li><a href="#galeri">Galeri Foto</a></li>
+                    <li><a href="{{ route('informasi.galeri') }}">Galeri Foto</a></li>
                 </ul>
             </li>
 

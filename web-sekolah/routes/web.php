@@ -124,6 +124,8 @@ Route::prefix('kesiswaan')->name('kesiswaan.')->group(function () {
 Route::prefix('informasi')->name('informasi.')->group(function () {
     // Halaman berita (kartu) + pengumuman (daftar/modal) dalam satu panel informasi.
     Route::get('berita', [InformasiController::class, 'index'])->name('index');
+    // Galeri foto — kartu foto yang menampilkan keterangan saat diklik.
+    Route::get('galeri', [InformasiController::class, 'galeri'])->name('galeri');
 });
 
 Route::prefix('ppdb')->name('ppdb.')->group(function () {
