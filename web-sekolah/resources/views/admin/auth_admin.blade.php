@@ -29,6 +29,7 @@
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
+            position: relative;
         }
 
         .login-wrapper {
@@ -197,24 +198,36 @@
             transform: translateY(0);
         }
 
-        /* ── Back link ── */
-        .back-home {
-            text-align: center;
-            margin-top: 1.4rem;
-        }
-
-        .back-home a {
-            font-size: .8rem;
-            color: rgba(255, 255, 255, .75);
-            text-decoration: none;
+        /* ── Back button (top-left) ── */
+        .back-btn {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
             display: inline-flex;
             align-items: center;
-            gap: .35rem;
-            transition: color .2s;
+            gap: .45rem;
+            padding: .5rem 1rem;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 50px;
+            color: #fff;
+            font-size: .82rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background .2s, border-color .2s;
+            z-index: 100;
         }
 
-        .back-home a:hover {
+        .back-btn:hover {
+            background: rgba(255, 255, 255, .28);
+            border-color: rgba(255, 255, 255, .45);
             color: #fff;
+        }
+
+        .back-btn i {
+            font-size: .9rem;
         }
 
         /* ── Alert ── */
@@ -222,10 +235,75 @@
             border-radius: 10px;
             font-size: .82rem;
         }
+
+        /* ── Responsive ── */
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+                align-items: flex-start;
+                padding-top: 5.5rem;
+            }
+
+            .login-wrapper {
+                max-width: 100%;
+            }
+
+            .back-btn {
+                top: .85rem;
+                left: .85rem;
+                padding: .4rem .85rem;
+                font-size: .78rem;
+            }
+
+            .brand-badge {
+                width: 56px;
+                height: 56px;
+                font-size: 1.3rem;
+                border-radius: 16px;
+            }
+
+            .login-brand h1 {
+                font-size: 1.15rem;
+            }
+
+            .login-brand {
+                margin-bottom: 1.5rem;
+            }
+
+            .login-card {
+                padding: 1.75rem 1.25rem;
+                border-radius: 16px;
+            }
+
+            .input-icon-wrap .form-control {
+                height: 44px;
+                font-size: .85rem;
+            }
+
+            .btn-login {
+                height: 46px;
+                font-size: .88rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .login-brand h1 {
+                font-size: 1rem;
+            }
+
+            .login-card h2 {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Back button — top left -->
+    <a href="{{ url('/') }}" class="back-btn">
+        <i class="bi bi-arrow-left"></i> Kembali ke Situs
+    </a>
 
     <div class="login-wrapper">
 
@@ -303,13 +381,6 @@
                     <i class="bi bi-box-arrow-in-right me-1"></i> Masuk
                 </button>
             </form>
-        </div>
-
-        <!-- Back to site -->
-        <div class="back-home">
-            <a href="{{ url('/') }}">
-                <i class="bi bi-arrow-left"></i> Kembali ke Halaman Utama
-            </a>
         </div>
 
     </div>

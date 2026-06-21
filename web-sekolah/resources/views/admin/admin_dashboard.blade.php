@@ -122,7 +122,8 @@
             border-top: 1px solid rgba(255, 255, 255, .1);
         }
 
-        .sidebar-footer a {
+        .sidebar-footer a,
+        .sidebar-footer-btn {
             display: flex;
             align-items: center;
             gap: .6rem;
@@ -130,9 +131,15 @@
             font-size: .8rem;
             text-decoration: none;
             transition: color .2s;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            width: 100%;
         }
 
-        .sidebar-footer a:hover {
+        .sidebar-footer a:hover,
+        .sidebar-footer-btn:hover {
             color: #fff;
         }
 
@@ -388,6 +395,100 @@
                 display: block;
             }
         }
+
+        @media (max-width: 767.98px) {
+            .topbar {
+                padding: 0 1rem;
+                height: 56px;
+            }
+
+            .topbar-left h5 {
+                font-size: .9rem;
+            }
+
+            .topbar-left p {
+                display: none;
+            }
+
+            .page-content {
+                padding: 1rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+                gap: .75rem;
+            }
+
+            .stat-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+                border-radius: 11px;
+                flex-shrink: 0;
+            }
+
+            .stat-value {
+                font-size: 1.4rem;
+            }
+
+            .stat-label {
+                font-size: .72rem;
+            }
+
+            .stat-delta {
+                font-size: .68rem;
+            }
+
+            .section-header {
+                padding: .85rem 1rem;
+            }
+
+            .activity-table td,
+            .activity-table th {
+                padding: .65rem 1rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            :root {
+                --topbar-h: 56px;
+            }
+
+            .page-content {
+                padding: .75rem;
+            }
+
+            .stat-card {
+                padding: .85rem;
+                gap: .6rem;
+                border-radius: 12px;
+            }
+
+            .stat-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+                border-radius: 9px;
+            }
+
+            .stat-value {
+                font-size: 1.25rem;
+            }
+
+            .section-card {
+                border-radius: 12px;
+            }
+
+            .quick-btn {
+                padding: 1rem .25rem;
+                font-size: .75rem;
+                border-radius: 10px;
+            }
+
+            .quick-btn i {
+                font-size: 1.2rem;
+            }
+        }
     </style>
 </head>
 
@@ -445,9 +546,9 @@
         </nav>
 
         <div class="sidebar-footer">
-            <a href="{{ url('/') }}">
+            <button type="button" class="sidebar-footer-btn" data-bs-toggle="modal" data-bs-target="#modalKembali">
                 <i class="bi bi-box-arrow-left"></i> Kembali ke Situs
-            </a>
+            </button>
         </div>
     </aside>
 
@@ -645,6 +746,41 @@
 
             </div>
         </main>
+    </div>
+
+    <!-- Modal Konfirmasi Kembali ke Situs (Logout) -->
+    <div class="modal fade" id="modalKembali" tabindex="-1" aria-labelledby="modalKembaliLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 16px; border: none; box-shadow: 0 16px 48px rgba(0,0,0,.18);">
+                <div class="modal-header border-0 pb-0">
+                    <div class="d-flex align-items-center gap-2">
+                        <div style="width:40px;height:40px;background:#fff3cd;border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                            <i class="bi bi-box-arrow-left" style="color:#856404;font-size:1.2rem;"></i>
+                        </div>
+                        <h5 class="modal-title mb-0" id="modalKembaliLabel" style="font-size:1rem;font-weight:600;color:#1e293b;">
+                            Kembali ke Situs?
+                        </h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body" style="color:#64748b;font-size:.88rem;padding-top:.75rem;">
+                    Anda akan keluar dari panel admin dan diarahkan ke halaman utama situs. Lanjutkan?
+                </div>
+                <div class="modal-footer border-0 pt-0 gap-2">
+                    <button type="button" class="btn btn-light btn-sm px-4" data-bs-dismiss="modal"
+                        style="border-radius:8px;font-size:.85rem;">
+                        Batal
+                    </button>
+                    <form method="POST" action="{{ route('admin.logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-sm px-4"
+                            style="background:#1a5f7a;color:#fff;border-radius:8px;font-size:.85rem;">
+                            <i class="bi bi-box-arrow-left me-1"></i> Ya, Kembali ke Situs
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
