@@ -1,8 +1,9 @@
 <nav class="navbar" id="navbar">
+    {{-- this is navbar links for template this website --}}
     <div class="nav-container">
         <a href="#beranda" class="logo">
             <span class="logo-mark">SD</span>
-            <span class="logo-text">SDN <strong>Nusantara</strong></span>
+            <span class="logo-text">SDN <strong>Dadapsari</strong></span>
         </a>
 
         <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false">
@@ -25,8 +26,8 @@
             <li class="dropdown">
                 <a href="#akademik">Akademik</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#kurikulum">Kurikulum</a></li>
-                    <li><a href="#kalender">Kalender Akademik</a></li>
+                    <li><a href="{{ route('akademik.kurikulum') }}">Kurikulum</a></li>
+                    <li><a href="{{ route('akademik.kalender') }}">Kalender Akademik</a></li>
                     <li><a href="#guru">Guru &amp; Staf</a></li>
                 </ul>
             </li>
@@ -34,17 +35,17 @@
             <li class="dropdown">
                 <a href="#kesiswaan">Kesiswaan</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#ekstrakurikuler">Ekstrakurikuler</a></li>
-                    <li><a href="#prestasi">Prestasi Siswa</a></li>
-                    <li><a href="#tata-tertib">Tata Tertib</a></li>
+                    <li><a href="{{ route('kesiswaan.ekstrakurikuler') }}">Ekstrakurikuler</a></li>
+                    <li><a href="{{ route('kesiswaan.prestasi') }}">Prestasi Siswa</a></li>
+                    <li><a href="{{ route('kesiswaan.tata-tertib') }}">Tata Tertib</a></li>
                 </ul>
             </li>
 
             <li class="dropdown">
                 <a href="#informasi">Informasi</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#berita">Berita &amp; Pengumuman</a></li>
-                    <li><a href="#ppdb">PPDB</a></li>
+                    <li><a href="{{ route('informasi.index') }}">Berita &amp; Pengumuman</a></li>
+                    <li><a href="{{ route('ppdb.index') }}">PPDB</a></li>
                     <li><a href="#galeri">Galeri Foto</a></li>
                 </ul>
             </li>
