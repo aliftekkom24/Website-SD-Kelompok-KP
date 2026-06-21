@@ -236,21 +236,122 @@
             margin-bottom: .3rem;
         }
 
+        .prestasi-card {
+            cursor: pointer;
+        }
+
         @media (max-width: 992px) {
-            .prestasi-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .prestasi-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 600px) {
-            .prestasi-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .prestasi-filters {
-                grid-template-columns: 1fr;
-            }
+            .prestasi-grid { grid-template-columns: 1fr; }
+            .prestasi-filters { grid-template-columns: 1fr; }
         }
+
+        /* ── MODAL ── */
+        .pm-overlay {
+            position: fixed; inset: 0; z-index: 9000;
+            background: rgba(0,0,0,.55);
+            backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 1rem;
+            opacity: 0; pointer-events: none;
+            transition: opacity .25s ease;
+        }
+        .pm-overlay.open { opacity: 1; pointer-events: all; }
+
+        .pm-dialog {
+            background: #fff;
+            border-radius: 20px;
+            width: 100%; max-width: 560px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 24px 60px rgba(0,43,91,.25);
+            transform: translateY(24px) scale(.97);
+            transition: transform .25s ease;
+        }
+        .pm-overlay.open .pm-dialog { transform: translateY(0) scale(1); }
+
+        .pm-foto {
+            width: 100%; aspect-ratio: 16/9; object-fit: cover;
+            border-radius: 20px 20px 0 0;
+            display: block;
+        }
+        .pm-foto-placeholder {
+            width: 100%; aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-radius: 20px 20px 0 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem;
+        }
+
+        .pm-body { padding: 1.5rem; }
+
+        .pm-top {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: .5rem; margin-bottom: .75rem;
+        }
+        .pm-rank {
+            display: inline-flex; align-items: center; gap: .35rem;
+            background: var(--accent-soft); color: var(--primary-dark);
+            font-weight: 700; font-size: .9rem;
+            padding: .35rem .9rem; border-radius: 50px;
+        }
+        .pm-kategori {
+            font-size: .72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .5px; color: var(--primary);
+        }
+        .pm-title {
+            font-size: 1.25rem; font-weight: 800;
+            color: var(--primary-dark); line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .pm-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: .6rem 1rem; margin-bottom: 1rem;
+        }
+        .pm-field label {
+            display: block; font-size: .7rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: .5px;
+            color: var(--muted); margin-bottom: .15rem;
+        }
+        .pm-field span {
+            font-size: .88rem; color: var(--text); font-weight: 500;
+        }
+
+        .pm-divider { height: 1px; background: #f1f5f9; margin: 1rem 0; }
+
+        .pm-desc-label {
+            font-size: .7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .5px; color: var(--muted); margin-bottom: .4rem;
+        }
+        .pm-desc {
+            font-size: .9rem; color: var(--text); line-height: 1.7;
+        }
+
+        .pm-close-btn {
+            display: block; width: 100%; margin-top: 1.25rem;
+            padding: .75rem; border-radius: 12px;
+            background: var(--primary); color: #fff;
+            font-size: .9rem; font-weight: 600;
+            border: none; cursor: pointer;
+            transition: opacity .2s;
+        }
+        .pm-close-btn:hover { opacity: .88; }
+
+        .pm-close-x {
+            position: absolute; top: 1rem; right: 1rem;
+            width: 36px; height: 36px;
+            background: rgba(0,0,0,.35);
+            border: none; border-radius: 50%;
+            color: #fff; font-size: 1.1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background .2s;
+        }
+        .pm-close-x:hover { background: rgba(0,0,0,.55); }
+        .pm-foto-wrap { position: relative; }
     </style>
 @endpush
 
@@ -306,8 +407,23 @@
                         $rankIcon = str_contains($p, '1') ? '🥇' : (str_contains($p, '2') ? '🥈' : (str_contains($p, '3') ? '🥉' : '🏅'));
                         $cari = strtolower(trim(($item->nama_kejuaraan ?? '') . ' ' . ($item->nama_siswa ?? '') . ' ' . ($item->penyelenggara ?? '')));
                     @endphp
-                    <article class="prestasi-card" data-kategori="{{ $item->kategori }}"
-                        data-tahun="{{ optional($item->tanggal)->format('Y') }}" data-cari="{{ $cari }}">
+                    <article class="prestasi-card"
+                        data-kategori="{{ $item->kategori }}"
+                        data-tahun="{{ optional($item->tanggal)->format('Y') }}"
+                        data-cari="{{ $cari }}"
+                        data-judul="{{ $item->nama_kejuaraan }}"
+                        data-peringkat="{{ $item->peringkat ?: 'Peserta' }}"
+                        data-rank-icon="{{ str_contains(strtolower($item->peringkat ?? ''), '1') ? '🥇' : (str_contains(strtolower($item->peringkat ?? ''), '2') ? '🥈' : (str_contains(strtolower($item->peringkat ?? ''), '3') ? '🥉' : '🏅')) }}"
+                        data-tingkat="{{ $item->tingkat }}"
+                        data-tanggal="{{ $item->tanggal ? $item->tanggal->translatedFormat('d F Y') : '' }}"
+                        data-siswa="{{ $item->nama_siswa }}"
+                        data-kelas="{{ $item->kelas }}"
+                        data-penyelenggara="{{ $item->penyelenggara }}"
+                        data-tempat="{{ $item->tempat }}"
+                        data-deskripsi="{{ $item->deskripsi }}"
+                        data-foto="{{ $item->fotoUrl() }}"
+                        tabindex="0" role="button" aria-label="Detail {{ $item->nama_kejuaraan }}"
+                        onclick="bukaModalPrestasi(this)">
                         <div class="prestasi-top">
                             <span class="prestasi-rank">{{ $rankIcon }} {{ $item->peringkat ?: 'Peserta' }}</span>
                             <span class="prestasi-kategori">{{ $item->kategori }}</span>
@@ -352,6 +468,34 @@
     </div>
 
 @endsection
+
+{{-- ===================== MODAL DETAIL PRESTASI ===================== --}}
+<div class="pm-overlay" id="prestasiModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <div class="pm-dialog">
+        <div class="pm-foto-wrap" id="pmFotoWrap">
+            {{-- foto atau placeholder diisi via JS --}}
+        </div>
+        <div class="pm-body">
+            <div class="pm-top">
+                <span class="pm-rank" id="pmRank"></span>
+                <span class="pm-kategori" id="pmKategori"></span>
+            </div>
+            <h2 class="pm-title" id="pmTitle"></h2>
+
+            <div class="pm-grid" id="pmGrid">
+                {{-- field diisi via JS --}}
+            </div>
+
+            <div id="pmDescWrap" style="display:none;">
+                <div class="pm-divider"></div>
+                <p class="pm-desc-label">Deskripsi</p>
+                <p class="pm-desc" id="pmDesc"></p>
+            </div>
+
+            <button class="pm-close-btn" onclick="tutupModalPrestasi()">Tutup</button>
+        </div>
+    </div>
+</div>
 
 @push('scripts')
     <script>
@@ -400,6 +544,74 @@
             yearSelect.addEventListener('change', applyFilter);
 
             applyFilter();
+
+            // Buka modal dengan keyboard (Enter / Space)
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') tutupModalPrestasi();
+            });
         })();
+
+        function bukaModalPrestasi(card) {
+            const d = card.dataset;
+            const modal = document.getElementById('prestasiModal');
+
+            // Foto / placeholder
+            const fotoWrap = document.getElementById('pmFotoWrap');
+            if (d.foto && d.foto !== 'null' && d.foto !== '') {
+                fotoWrap.innerHTML =
+                    '<button class="pm-close-x" onclick="tutupModalPrestasi()" aria-label="Tutup">✕</button>' +
+                    '<img class="pm-foto" src="' + d.foto + '" alt="' + d.judul + '">';
+            } else {
+                fotoWrap.innerHTML =
+                    '<button class="pm-close-x" onclick="tutupModalPrestasi()" aria-label="Tutup">✕</button>' +
+                    '<div class="pm-foto-placeholder">🏆</div>';
+            }
+
+            // Rank & kategori
+            document.getElementById('pmRank').textContent = (d.rankIcon || '🏅') + ' ' + d.peringkat;
+            document.getElementById('pmKategori').textContent = d.kategori;
+
+            // Judul
+            document.getElementById('pmTitle').textContent = d.judul;
+
+            // Grid field — hanya tampilkan field yang berisi data
+            const fields = [
+                { label: 'Tanggal',       value: d.tanggal },
+                { label: 'Tingkat',       value: d.tingkat ? 'Tingkat ' + d.tingkat : '' },
+                { label: 'Nama Siswa',    value: d.siswa },
+                { label: 'Kelas',         value: d.kelas },
+                { label: 'Penyelenggara', value: d.penyelenggara },
+                { label: 'Tempat',        value: d.tempat },
+            ];
+            const pmGrid = document.getElementById('pmGrid');
+            pmGrid.innerHTML = fields
+                .filter(function (f) { return f.value && f.value.trim() !== ''; })
+                .map(function (f) {
+                    return '<div class="pm-field"><label>' + f.label + '</label><span>' + f.value + '</span></div>';
+                }).join('');
+
+            // Deskripsi
+            const descWrap = document.getElementById('pmDescWrap');
+            const descEl   = document.getElementById('pmDesc');
+            if (d.deskripsi && d.deskripsi.trim() !== '') {
+                descEl.textContent = d.deskripsi;
+                descWrap.style.display = '';
+            } else {
+                descWrap.style.display = 'none';
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function tutupModalPrestasi() {
+            document.getElementById('prestasiModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Klik di luar dialog menutup modal
+        document.getElementById('prestasiModal').addEventListener('click', function (e) {
+            if (e.target === this) tutupModalPrestasi();
+        });
     </script>
 @endpush
