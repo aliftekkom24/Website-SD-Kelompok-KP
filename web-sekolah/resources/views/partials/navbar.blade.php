@@ -14,11 +14,11 @@
             <li><a href="{{ route('home') }}">Beranda</a></li>
 
             <li class="dropdown">
-                <a href="#profil">Profil</a>
+                <a href="{{ route('home') }}#profil">Profil</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#sejarah">Sejarah</a></li>
-                    <li><a href="#visi-misi">Visi &amp; Misi</a></li>
-                    <li><a href="#transparansi-dana-bos">Transparansi Dana BOS</a></li>
+                    <li><a href="{{ route('profil.sejarah') }}">Sejarah</a></li>
+                    <li><a href="{{ route('profil.visi-misi') }}">Visi &amp; Misi</a></li>
+                    <li><a href="{{ route('profil.transparansi-dana-bos') }}">Transparansi Dana BOS</a></li>
                     <li><a href="{{ route('profil.fasilitas') }}">Fasilitas</a></li>
                 </ul>
             </li>

@@ -45,19 +45,21 @@
         </div>
 
         <div class="cards-grid">
-            <article id="sejarah" class="card">
+            <a href="{{ route('profil.sejarah') }}" id="sejarah" class="card"
+               style="text-decoration:none;color:inherit;display:block;">
                 <div class="card-icon">📖</div>
                 <h3>Sejarah</h3>
                 <p>Berdiri sejak 1985, SDN Dadapsari telah menjadi rumah belajar bagi ribuan lulusan yang tersebar di
                     berbagai bidang.</p>
-            </article>
+            </a>
 
-            <article id="visi-misi" class="card">
+            <a href="{{ route('profil.visi-misi') }}" id="visi-misi" class="card"
+               style="text-decoration:none;color:inherit;display:block;">
                 <div class="card-icon">🎯</div>
                 <h3>Visi &amp; Misi</h3>
                 <p>Mewujudkan sekolah unggul yang menghasilkan peserta didik beriman, berprestasi, dan peduli lingkungan.
                 </p>
-            </article>
+            </a>
 
             <article id="struktur" class="card">
                 <div class="card-icon">🏛️</div>
@@ -65,12 +67,13 @@
                 <p>Dipimpin kepala sekolah profesional, didukung tenaga pendidik dan staf yang kompeten dan berdedikasi.</p>
             </article>
 
-            <article id="fasilitas" class="card">
+            <a href="{{ route('profil.fasilitas') }}" id="fasilitas" class="card"
+               style="text-decoration:none;color:inherit;display:block;">
                 <div class="card-icon">🏫</div>
                 <h3>Fasilitas</h3>
                 <p>Perpustakaan, laboratorium komputer, lapangan olahraga, UKS, dan ruang kelas yang nyaman serta modern.
                 </p>
-            </article>
+            </a>
         </div>
     </section>
 
