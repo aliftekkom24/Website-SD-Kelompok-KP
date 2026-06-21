@@ -2,11 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
-<<<<<<< Updated upstream
-=======
-use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\KesiswaanController;
->>>>>>> Stashed changes
+use App\Http\Controllers\InformasiController;
 
 Route::get('/', function () {
     if (auth()->check()) {
@@ -41,7 +38,6 @@ Route::prefix('profil')->name('profil.')->group(function () {
     })->name('fasilitas');
 });
 
-<<<<<<< Updated upstream
 Route::prefix('akademik')->name('akademik.')->group(function () {
     Route::get('kalender', function () {
         // Data kalender akademik — nantinya bisa diambil dari database lewat dashboard admin.
@@ -116,12 +112,83 @@ Route::prefix('akademik')->name('akademik.')->group(function () {
             'blok' => $blok,
         ]);
     })->name('kurikulum');
-=======
+});
+
 Route::prefix('kesiswaan')->name('kesiswaan.')->group(function () {
     Route::get('ekstrakurikuler', [KesiswaanController::class, 'ekstrakurikuler'])->name('ekstrakurikuler');
     Route::get('prestasi', [KesiswaanController::class, 'prestasi'])->name('prestasi');
     Route::get('tata-tertib', [KesiswaanController::class, 'tataTertib'])->name('tata-tertib');
->>>>>>> Stashed changes
+});
+
+Route::prefix('informasi')->name('informasi.')->group(function () {
+    // Halaman berita (kartu) + pengumuman (daftar/modal) dalam satu panel informasi.
+    Route::get('berita', [InformasiController::class, 'index'])->name('index');
+});
+
+Route::prefix('ppdb')->name('ppdb.')->group(function () {
+    Route::get('/', function () {
+        // 4 poin utama PPDB — nantinya bisa diisi/diubah lewat dashboard admin.
+        $poin = [
+            [
+                'key' => 'pendaftaran',
+                'icon' => '📝',
+                'judul' => 'Pendaftaran Siswa Baru',
+                'deskripsi' => 'Daftarkan calon siswa baru secara online melalui formulir pendaftaran resmi sekolah.',
+                'tipe' => 'link',
+                'cta' => 'Daftar Sekarang',
+                'link' => '#', // ganti dengan tautan formulir pendaftaran online
+            ],
+            [
+                'key' => 'pra-pendaftaran',
+                'icon' => '📋',
+                'judul' => 'Panduan Pra Pendaftaran',
+                'deskripsi' => 'Hal-hal yang perlu disiapkan calon siswa dan orang tua sebelum melakukan pendaftaran.',
+                'tipe' => 'panduan',
+                'cta' => 'Lihat Panduan',
+                'langkah' => [
+                    'Siapkan Kartu Keluarga (KK) dan Akta Kelahiran calon siswa.',
+                    'Pastikan usia calon siswa memenuhi syarat minimal sesuai ketentuan.',
+                    'Siapkan pas foto terbaru calon siswa ukuran 3×4.',
+                    'Siapkan alamat email aktif untuk menerima informasi pendaftaran.',
+                    'Pelajari jadwal dan tahapan PPDB pada pengumuman resmi sekolah.',
+                ],
+            ],
+            [
+                'key' => 'pendaftaran-siswa',
+                'icon' => '🖊️',
+                'judul' => 'Panduan Pendaftaran',
+                'deskripsi' => 'Langkah-langkah mengisi dan mengirimkan formulir pendaftaran siswa baru.',
+                'tipe' => 'panduan',
+                'cta' => 'Lihat Panduan',
+                'langkah' => [
+                    'Buka tautan formulir pendaftaran siswa baru.',
+                    'Isi data diri calon siswa dan orang tua/wali dengan lengkap dan benar.',
+                    'Unggah berkas persyaratan (KK, Akta Kelahiran, pas foto).',
+                    'Periksa kembali seluruh data sebelum dikirim.',
+                    'Kirim formulir dan simpan bukti pendaftaran.',
+                ],
+            ],
+            [
+                'key' => 'daftar-ulang',
+                'icon' => '✅',
+                'judul' => 'Daftar Ulang',
+                'deskripsi' => 'Panduan daftar ulang bagi calon siswa yang dinyatakan diterima.',
+                'tipe' => 'panduan',
+                'cta' => 'Lihat Panduan',
+                'langkah' => [
+                    'Pastikan calon siswa dinyatakan diterima pada pengumuman PPDB.',
+                    'Lengkapi dan serahkan berkas daftar ulang sesuai ketentuan sekolah.',
+                    'Lakukan daftar ulang pada rentang waktu yang telah ditentukan.',
+                    'Simpan bukti daftar ulang sebagai tanda telah resmi menjadi siswa.',
+                ],
+            ],
+        ];
+
+        return view('ppdb.index', [
+            'judul' => 'Penerimaan Peserta Didik Baru',
+            'poin' => $poin,
+        ]);
+    })->name('index');
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
