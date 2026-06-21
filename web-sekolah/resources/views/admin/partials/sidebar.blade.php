@@ -19,7 +19,11 @@
         <div class="nav-divider"></div>
 
         {{-- Profil --}}
-        @php $profilOpen = false; @endphp
+        @php
+            $profilOpen = request()->routeIs(
+                'admin.profil-setting.*', 'admin.sarpras.*', 'admin.ruang-kelas.*'
+            );
+        @endphp
         <button class="sidebar-link sidebar-collapse-btn" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navProfil"
                 aria-expanded="{{ $profilOpen ? 'true' : 'false' }}">
@@ -28,10 +32,18 @@
             <i class="bi bi-chevron-down sidebar-arrow ms-auto"></i>
         </button>
         <div class="collapse {{ $profilOpen ? 'show' : '' }}" id="navProfil">
-            <a href="#" class="sidebar-link sidebar-child"><i class="bi bi-clock-history"></i> Sejarah</a>
-            <a href="#" class="sidebar-link sidebar-child"><i class="bi bi-eye-fill"></i> Visi &amp; Misi</a>
-            <a href="#" class="sidebar-link sidebar-child"><i class="bi bi-cash-coin"></i> Transparansi Dana BOS</a>
-            <a href="#" class="sidebar-link sidebar-child"><i class="bi bi-building"></i> Fasilitas</a>
+            <a href="{{ route('admin.profil-setting.edit') }}"
+               class="sidebar-link sidebar-child {{ request()->routeIs('admin.profil-setting.*') ? 'active' : '' }}">
+                <i class="bi bi-pencil-square"></i> Sejarah / Visi / Dana BOS
+            </a>
+            <a href="{{ route('admin.sarpras.index') }}"
+               class="sidebar-link sidebar-child {{ request()->routeIs('admin.sarpras.*') ? 'active' : '' }}">
+                <i class="bi bi-building"></i> Sarana &amp; Prasarana
+            </a>
+            <a href="{{ route('admin.ruang-kelas.index') }}"
+               class="sidebar-link sidebar-child {{ request()->routeIs('admin.ruang-kelas.*') ? 'active' : '' }}">
+                <i class="bi bi-door-closed-fill"></i> Ruang Kelas
+            </a>
         </div>
 
         {{-- Akademik --}}

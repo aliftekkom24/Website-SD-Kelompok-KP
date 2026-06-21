@@ -20,7 +20,9 @@
             --topbar-h: 64px;
         }
 
-        * { font-family: 'Poppins', sans-serif; }
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
 
         body {
             background: #f0f4f8;
@@ -82,11 +84,17 @@
             flex: 1;
             overflow-y: auto;
             scrollbar-width: thin;
-            scrollbar-color: rgba(255,255,255,.15) transparent;
+            scrollbar-color: rgba(255, 255, 255, .15) transparent;
         }
 
-        .sidebar-nav::-webkit-scrollbar { width: 4px; }
-        .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 4px; }
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, .15);
+            border-radius: 4px;
+        }
 
         .nav-divider {
             height: 1px;
@@ -184,7 +192,9 @@
         }
 
         .sidebar-footer a:hover,
-        .sidebar-footer-btn:hover { color: #fff; }
+        .sidebar-footer-btn:hover {
+            color: #fff;
+        }
 
         /* ── MAIN AREA ── */
         .main-wrapper {
@@ -273,10 +283,25 @@
             flex-shrink: 0;
         }
 
-        .stat-icon.blue   { background: #dbeafe; color: #1d4ed8; }
-        .stat-icon.green  { background: #dcfce7; color: #16a34a; }
-        .stat-icon.yellow { background: #fef9c3; color: #ca8a04; }
-        .stat-icon.teal   { background: var(--accent-soft); color: var(--primary); }
+        .stat-icon.blue {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .stat-icon.green {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .stat-icon.yellow {
+            background: #fef9c3;
+            color: #ca8a04;
+        }
+
+        .stat-icon.teal {
+            background: var(--accent-soft);
+            color: var(--primary);
+        }
 
         .stat-value {
             font-size: 1.75rem;
@@ -297,8 +322,13 @@
             margin-top: .4rem;
         }
 
-        .stat-delta.up   { color: #16a34a; }
-        .stat-delta.flat { color: #94a3b8; }
+        .stat-delta.up {
+            color: #16a34a;
+        }
+
+        .stat-delta.flat {
+            color: #94a3b8;
+        }
 
         /* ── SECTION CARDS ── */
         .section-card {
@@ -340,7 +370,9 @@
             letter-spacing: .05em;
         }
 
-        .activity-table tr:last-child td { border-bottom: 0; }
+        .activity-table tr:last-child td {
+            border-bottom: 0;
+        }
 
         .ikon-activity {
             width: 32px;
@@ -374,7 +406,9 @@
             color: var(--primary-dark);
         }
 
-        .quick-btn i { font-size: 1.4rem; }
+        .quick-btn i {
+            font-size: 1.4rem;
+        }
 
         /* ── MOBILE TOGGLE ── */
         .sidebar-toggle {
@@ -386,10 +420,22 @@
         }
 
         @media (max-width: 991.98px) {
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.open { transform: translateX(0); }
-            .main-wrapper { margin-left: 0; }
-            .sidebar-toggle { display: block; }
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-wrapper {
+                margin-left: 0;
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
             .sidebar-overlay {
                 display: none;
                 position: fixed;
@@ -397,32 +443,104 @@
                 background: rgba(0, 0, 0, .4);
                 z-index: 1049;
             }
-            .sidebar-overlay.open { display: block; }
+
+            .sidebar-overlay.open {
+                display: block;
+            }
         }
 
         @media (max-width: 767.98px) {
-            .topbar { padding: 0 1rem; height: 56px; }
-            .topbar-left h5 { font-size: .9rem; }
-            .topbar-left p { display: none; }
-            .page-content { padding: 1rem; }
-            .stat-card { padding: 1rem; gap: .75rem; }
-            .stat-icon { width: 44px; height: 44px; font-size: 1.1rem; border-radius: 11px; flex-shrink: 0; }
-            .stat-value { font-size: 1.4rem; }
-            .stat-label { font-size: .72rem; }
-            .stat-delta { font-size: .68rem; }
-            .section-header { padding: .85rem 1rem; }
-            .activity-table td, .activity-table th { padding: .65rem 1rem; }
+            .topbar {
+                padding: 0 1rem;
+                height: 56px;
+            }
+
+            .topbar-left h5 {
+                font-size: .9rem;
+            }
+
+            .topbar-left p {
+                display: none;
+            }
+
+            .page-content {
+                padding: 1rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+                gap: .75rem;
+            }
+
+            .stat-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+                border-radius: 11px;
+                flex-shrink: 0;
+            }
+
+            .stat-value {
+                font-size: 1.4rem;
+            }
+
+            .stat-label {
+                font-size: .72rem;
+            }
+
+            .stat-delta {
+                font-size: .68rem;
+            }
+
+            .section-header {
+                padding: .85rem 1rem;
+            }
+
+            .activity-table td,
+            .activity-table th {
+                padding: .65rem 1rem;
+            }
         }
 
         @media (max-width: 575.98px) {
-            :root { --topbar-h: 56px; }
-            .page-content { padding: .75rem; }
-            .stat-card { padding: .85rem; gap: .6rem; border-radius: 12px; }
-            .stat-icon { width: 38px; height: 38px; font-size: 1rem; border-radius: 9px; }
-            .stat-value { font-size: 1.25rem; }
-            .section-card { border-radius: 12px; }
-            .quick-btn { padding: 1rem .25rem; font-size: .75rem; border-radius: 10px; }
-            .quick-btn i { font-size: 1.2rem; }
+            :root {
+                --topbar-h: 56px;
+            }
+
+            .page-content {
+                padding: .75rem;
+            }
+
+            .stat-card {
+                padding: .85rem;
+                gap: .6rem;
+                border-radius: 12px;
+            }
+
+            .stat-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+                border-radius: 9px;
+            }
+
+            .stat-value {
+                font-size: 1.25rem;
+            }
+
+            .section-card {
+                border-radius: 12px;
+            }
+
+            .quick-btn {
+                padding: 1rem .25rem;
+                font-size: .75rem;
+                border-radius: 10px;
+            }
+
+            .quick-btn i {
+                font-size: 1.2rem;
+            }
         }
     </style>
     @yield('styles')
@@ -478,10 +596,12 @@
             <div class="modal-content" style="border-radius:16px;border:none;box-shadow:0 16px 48px rgba(0,0,0,.18);">
                 <div class="modal-header border-0 pb-0">
                     <div class="d-flex align-items-center gap-2">
-                        <div style="width:40px;height:40px;background:#fff3cd;border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                        <div
+                            style="width:40px;height:40px;background:#fff3cd;border-radius:10px;display:flex;align-items:center;justify-content:center;">
                             <i class="bi bi-box-arrow-left" style="color:#856404;font-size:1.2rem;"></i>
                         </div>
-                        <h5 class="modal-title mb-0" id="modalKembaliLabel" style="font-size:1rem;font-weight:600;color:#1e293b;">
+                        <h5 class="modal-title mb-0" id="modalKembaliLabel"
+                            style="font-size:1rem;font-weight:600;color:#1e293b;">
                             Kembali ke Situs?
                         </h5>
                     </div>
@@ -507,12 +627,19 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const sidebar  = document.getElementById('sidebar');
-        const overlay  = document.getElementById('sidebarOverlay');
-        const toggle   = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const toggle = document.getElementById('sidebarToggle');
 
-        function openSidebar()  { sidebar.classList.add('open');    overlay.classList.add('open'); }
-        function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+        function openSidebar() {
+            sidebar.classList.add('open');
+            overlay.classList.add('open');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        }
 
         toggle.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
         overlay.addEventListener('click', closeSidebar);

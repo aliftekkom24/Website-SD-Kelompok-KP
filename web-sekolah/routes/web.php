@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\KontakController;
 use App\Http\Controllers\Admin\BeritaController;
@@ -11,6 +12,9 @@ use App\Http\Controllers\Admin\PpdbController;
 use App\Http\Controllers\Admin\EkstrakurikulerController;
 use App\Http\Controllers\Admin\PrestasiController;
 use App\Http\Controllers\Admin\TataTertibController;
+use App\Http\Controllers\Admin\SarprasController;
+use App\Http\Controllers\Admin\RuangKelasController;
+use App\Http\Controllers\Admin\ProfilSettingController;
 use App\Http\Controllers\KesiswaanController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\Admin\AuthController;
@@ -19,28 +23,10 @@ use App\Models\PpdbSetting;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('profil')->name('profil.')->group(function () {
-    Route::get('fasilitas', function () {
-        $sarpras = [
-            ['jenis' => 'Ruang Kelas', 'ganjil' => 6, 'genap' => 6],
-            ['jenis' => 'Ruang Perpustakaan', 'ganjil' => 1, 'genap' => 1],
-            ['jenis' => 'Ruang Laboratorium', 'ganjil' => 1, 'genap' => 1],
-            ['jenis' => 'Ruang Praktik', 'ganjil' => 0, 'genap' => 0],
-            ['jenis' => 'Ruang Pimpinan', 'ganjil' => 1, 'genap' => 1],
-            ['jenis' => 'Ruang Guru', 'ganjil' => 1, 'genap' => 1],
-            ['jenis' => 'Ruang Ibadah', 'ganjil' => 0, 'genap' => 0],
-            ['jenis' => 'Ruang UKS', 'ganjil' => 0, 'genap' => 0],
-            ['jenis' => 'Ruang Toilet', 'ganjil' => 5, 'genap' => 5],
-            ['jenis' => 'Ruang Gudang', 'ganjil' => 1, 'genap' => 1],
-            ['jenis' => 'Ruang Sirkulasi', 'ganjil' => 0, 'genap' => 0],
-            ['jenis' => 'Tempat Bermain / Olahraga', 'ganjil' => 0, 'genap' => 0],
-            ['jenis' => 'Ruang TU', 'ganjil' => 0, 'genap' => 0],
-            ['jenis' => 'Ruang Konseling', 'ganjil' => 0, 'genap' => 0],
-            ['jenis' => 'Ruang OSIS', 'ganjil' => 0, 'genap' => 0],
-            ['jenis' => 'Ruang Bangunan', 'ganjil' => 1, 'genap' => 1],
-        ];
-
-        return view('Profil.fasilitas', compact('sarpras'));
-    })->name('fasilitas');
+    Route::get('sejarah',              [ProfilController::class, 'sejarah'])->name('sejarah');
+    Route::get('visi-misi',            [ProfilController::class, 'visiMisi'])->name('visi-misi');
+    Route::get('transparansi-dana-bos',[ProfilController::class, 'transparansiDanaBos'])->name('transparansi-dana-bos');
+    Route::get('fasilitas',            [ProfilController::class, 'fasilitas'])->name('fasilitas');
 });
 
 Route::prefix('akademik')->name('akademik.')->group(function () {
@@ -209,6 +195,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
+        // Profil — Konten (Sejarah / Visi Misi / Dana BOS)
+        Route::get('profil-setting',  [ProfilSettingController::class, 'edit'])->name('profil-setting.edit');
+        Route::put('profil-setting',  [ProfilSettingController::class, 'update'])->name('profil-setting.update');
+
         // Kontak & Footer
         Route::get('kontak', [KontakController::class, 'edit'])->name('kontak');
         Route::put('kontak', [KontakController::class, 'update'])->name('kontak.update');
@@ -264,6 +254,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/{prestasi}',                   [PrestasiController::class, 'update'])->name('update');
             Route::delete('/{prestasi}',                [PrestasiController::class, 'destroy'])->name('destroy');
             Route::patch('/{prestasi}/toggle',          [PrestasiController::class, 'toggle'])->name('toggle');
+        });
+
+        // Profil — Sarana & Prasarana
+        Route::prefix('sarpras')->name('sarpras.')->group(function () {
+            Route::get('/',                     [SarprasController::class, 'index'])->name('index');
+            Route::get('/create',               [SarprasController::class, 'create'])->name('create');
+            Route::post('/',                    [SarprasController::class, 'store'])->name('store');
+            Route::get('/{sarpra}/edit',        [SarprasController::class, 'edit'])->name('edit');
+            Route::put('/{sarpra}',             [SarprasController::class, 'update'])->name('update');
+            Route::delete('/{sarpra}',          [SarprasController::class, 'destroy'])->name('destroy');
+            Route::patch('/{sarpra}/toggle',    [SarprasController::class, 'toggle'])->name('toggle');
+        });
+
+        // Profil — Ruang Kelas
+        Route::prefix('ruang-kelas')->name('ruang-kelas.')->group(function () {
+            Route::get('/',                         [RuangKelasController::class, 'index'])->name('index');
+            Route::get('/create',                   [RuangKelasController::class, 'create'])->name('create');
+            Route::post('/',                        [RuangKelasController::class, 'store'])->name('store');
+            Route::get('/{ruangKelas}/edit',        [RuangKelasController::class, 'edit'])->name('edit');
+            Route::put('/{ruangKelas}',             [RuangKelasController::class, 'update'])->name('update');
+            Route::delete('/{ruangKelas}',          [RuangKelasController::class, 'destroy'])->name('destroy');
+            Route::patch('/{ruangKelas}/toggle',    [RuangKelasController::class, 'toggle'])->name('toggle');
         });
 
         // Kesiswaan — Tata Tertib
