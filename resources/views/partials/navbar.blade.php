@@ -2,7 +2,7 @@
     {{-- this is navbar links for template this website --}}
     <div class="nav-container">
         <a href="{{ route('home') }}" class="logo">
-            <span class="logo-mark">SD</span>
+            <img src="/images/logo-sdn.png" alt="Logo SDN Dadapsari" class="logo-img">
             <span class="logo-text"><strong>SDN Dadapsari</strong></span>
         </a>
 
@@ -14,8 +14,9 @@
             <li><a href="{{ route('home') }}">Beranda</a></li>
 
             <li class="dropdown">
-                <a href="{{ route('home') }}#profil">Profil</a>
+                <a href="{{ route('profil.index') }}">Profil</a>
                 <ul class="dropdown-menu">
+                    <li><a href="{{ route('profil.index') }}">Profil Sekolah</a></li>
                     <li><a href="{{ route('profil.sejarah') }}">Sejarah</a></li>
                     <li><a href="{{ route('profil.visi-misi') }}">Visi &amp; Misi</a></li>
                     <li><a href="{{ route('profil.transparansi-dana-bos') }}">Transparansi Dana BOS</a></li>

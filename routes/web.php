@@ -29,6 +29,7 @@ Route::middleware('redirect.admin')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('profil')->name('profil.')->group(function () {
+    Route::get('/',                     [ProfilController::class, 'index'])->name('index');
     Route::get('sejarah',              [ProfilController::class, 'sejarah'])->name('sejarah');
     Route::get('visi-misi',            [ProfilController::class, 'visiMisi'])->name('visi-misi');
     Route::get('transparansi-dana-bos',[ProfilController::class, 'transparansiDanaBos'])->name('transparansi-dana-bos');

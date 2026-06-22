@@ -6,10 +6,17 @@
 @push('styles')
 <style>
     .page-header {
-        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 55%, #2a8aa3 100%);
+        background: linear-gradient(135deg, #312e81 0%, #4338ca 55%, #6366f1 100%);
         color: var(--white); padding: 3.5rem 1.5rem 5rem; text-align: center;
+        position: relative; overflow: hidden;
     }
-    .page-header .eyebrow { color: var(--accent); }
+    .page-header::before {
+        content: ''; position: absolute;
+        width: 300px; height: 300px; border-radius: 50%;
+        background: rgba(255,255,255,.08); top: -80px; right: -60px;
+    }
+    .page-header-inner { position: relative; z-index: 1; }
+    .page-header .eyebrow { background: rgba(255,255,255,.18); color: #c7d2fe; border: 1px solid rgba(255,255,255,.3); padding: .3rem .9rem; border-radius:50px; font-size:.8rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; display:inline-block; margin-bottom:.6rem; }
     .page-header h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin: .4rem 0 .6rem; }
     .page-header p  { max-width: 620px; margin: 0 auto; color: rgba(255,255,255,.8); }
 
@@ -65,13 +72,15 @@
 @section('content')
 
 <section class="page-header">
-    <span class="eyebrow">Profil Sekolah</span>
-    <h1>Visi &amp; Misi</h1>
-    <p>Landasan filosofi dan arah gerak SDN Dadapsari dalam menyelenggarakan pendidikan yang bermakna dan berkualitas.</p>
+    <div class="page-header-inner">
+        <span class="eyebrow">Profil Sekolah</span>
+        <h1>Visi &amp; Misi</h1>
+        <p>Landasan filosofi dan arah gerak SDN Dadapsari dalam menyelenggarakan pendidikan yang bermakna dan berkualitas.</p>
+    </div>
 </section>
 
 <div class="vm-wrap">
-    <a href="{{ route('home') }}#profil" class="back-link">← Kembali ke Profil</a>
+    <a href="{{ route('profil.index') }}" class="back-link">← Kembali ke Profil</a>
 
     {{-- VISI --}}
     @if ($setting->visi)

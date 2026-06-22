@@ -8,31 +8,34 @@
 @section('content')
 
     {{-- ===================== HERO / BERANDA ===================== --}}
-    <section id="beranda" class="hero">
-        <div class="hero-inner">
-            <span class="hero-badge">Selamat Datang di Website Resmi</span>
-            <h1>SDN <span>Dadapsari</span></h1>
-            <p>Membentuk generasi cerdas, berkarakter, dan berakhlak mulia melalui pendidikan dasar yang berkualitas dan
-                menyenangkan.</p>
-            <div class="hero-actions">
-                @auth
-                    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Daftar PPDB Sekarang</a>
-                @else
-                    <a href="#ppdb" class="btn btn-primary">Daftar PPDB Sekarang</a>
-                @endauth
-                <a href="#profil" class="btn btn-ghost">Kenali Kami</a>
+    <section id="beranda" class="hero hero-split">
+        <div class="hero-split-inner">
+            <div class="hero-content">
+                <span class="hero-badge">Selamat Datang di Website Resmi</span>
+                <h1>SDN <span>Dadapsari</span></h1>
+                <p>Membentuk generasi cerdas, berkarakter, dan berakhlak mulia melalui pendidikan dasar yang berkualitas dan menyenangkan.</p>
+                <p class="hero-motto"><em>"Santun dalam Berperilaku, Hebat dalam Prestasi"</em></p>
+                <div class="hero-actions">
+                    @auth
+                        <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Daftar PPDB Sekarang</a>
+                    @else
+                        <a href="#ppdb" class="btn btn-primary">Daftar PPDB Sekarang</a>
+                    @endauth
+                    <a href="#profil" class="btn btn-ghost">Kenali Kami</a>
+                </div>
+            </div>
+            <div class="hero-photo">
+                <div class="hero-photo-frame">
+                    <img src="/images/sekolah-1.jpeg" alt="Gedung SDN Dadapsari" loading="eager">
+                </div>
             </div>
         </div>
 
         <div class="hero-stats">
-            <div class="stat"><span class="stat-num" data-target="520">0</span><span class="stat-label">Siswa Aktif</span>
-            </div>
-            <div class="stat"><span class="stat-num" data-target="32">0</span><span class="stat-label">Guru &amp;
-                    Staf</span></div>
-            <div class="stat"><span class="stat-num" data-target="18">0</span><span class="stat-label">Ruang Kelas</span>
-            </div>
-            <div class="stat"><span class="stat-num" data-target="45">0</span><span class="stat-label">Prestasi</span>
-            </div>
+            <div class="stat"><span class="stat-num" data-target="520">0</span><span class="stat-label">Siswa Aktif</span></div>
+            <div class="stat"><span class="stat-num" data-target="32">0</span><span class="stat-label">Guru &amp; Staf</span></div>
+            <div class="stat"><span class="stat-num" data-target="18">0</span><span class="stat-label">Ruang Kelas</span></div>
+            <div class="stat"><span class="stat-num" data-target="45">0</span><span class="stat-label">Prestasi</span></div>
         </div>
     </section>
 
@@ -46,34 +49,31 @@
 
         <div class="cards-grid">
             <a href="{{ route('profil.sejarah') }}" id="sejarah" class="card"
-               style="text-decoration:none;color:inherit;display:block;">
+               style="text-decoration:none;color:inherit;display:block;border-top:4px solid #f59e0b;">
                 <div class="card-icon">📖</div>
                 <h3>Sejarah</h3>
-                <p>Berdiri sejak 1985, SDN Dadapsari telah menjadi rumah belajar bagi ribuan lulusan yang tersebar di
-                    berbagai bidang.</p>
+                <p>Berdiri sejak 1965 dengan nama SDN Mlayu Darat, berganti menjadi SDN Dadapsari dan terus berkembang hingga kini.</p>
             </a>
 
             <a href="{{ route('profil.visi-misi') }}" id="visi-misi" class="card"
-               style="text-decoration:none;color:inherit;display:block;">
+               style="text-decoration:none;color:inherit;display:block;border-top:4px solid #6366f1;">
                 <div class="card-icon">🎯</div>
                 <h3>Visi &amp; Misi</h3>
-                <p>Mewujudkan sekolah unggul yang menghasilkan peserta didik beriman, berprestasi, dan peduli lingkungan.
-                </p>
+                <p>Mewujudkan sekolah unggul yang menghasilkan peserta didik beriman, berprestasi, dan peduli lingkungan.</p>
             </a>
 
             <a href="{{ route('profil.transparansi-dana-bos') }}" id="transparansi-dana-bos" class="card"
-               style="text-decoration:none;color:inherit;display:block;">
+               style="text-decoration:none;color:inherit;display:block;border-top:4px solid #10b981;">
                 <div class="card-icon">💰</div>
                 <h3>Transparansi Dana BOS</h3>
-                <p>Informasi penggunaan dana Bantuan Operasional Sekolah secara terbuka dan akuntabel.</p>
+                <p>Informasi penggunaan dana Bantuan Operasional Sekolah secara terbuka dan akuntabel kepada masyarakat.</p>
             </a>
 
             <a href="{{ route('profil.fasilitas') }}" id="fasilitas" class="card"
-               style="text-decoration:none;color:inherit;display:block;">
+               style="text-decoration:none;color:inherit;display:block;border-top:4px solid var(--accent);">
                 <div class="card-icon">🏫</div>
                 <h3>Fasilitas</h3>
-                <p>Perpustakaan, laboratorium komputer, lapangan olahraga, UKS, dan ruang kelas yang nyaman serta modern.
-                </p>
+                <p>Perpustakaan, laboratorium komputer, lapangan olahraga, UKS, dan ruang kelas yang nyaman serta kondusif.</p>
             </a>
         </div>
     </section>
@@ -330,12 +330,12 @@
             <div class="contact-info">
                 <div class="contact-item"><span>📍</span>
                     <div><strong>Alamat</strong>
-                        <p>Jl. Pendidikan No. 1, Dadapsari</p>
+                        <p>Jl. Petek No. 117-119, Kel. Dadapsari,<br>Kec. Semarang Utara, Kota Semarang</p>
                     </div>
                 </div>
                 <div class="contact-item"><span>📞</span>
                     <div><strong>Telepon</strong>
-                        <p>(021) 123-4567</p>
+                        <p>(024) 3568721</p>
                     </div>
                 </div>
                 <div class="contact-item"><span>✉️</span>

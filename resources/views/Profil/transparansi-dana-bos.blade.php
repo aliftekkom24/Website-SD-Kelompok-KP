@@ -6,10 +6,17 @@
 @push('styles')
 <style>
     .page-header {
-        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 55%, #2a8aa3 100%);
+        background: linear-gradient(135deg, #064e3b 0%, #059669 55%, #34d399 100%);
         color: var(--white); padding: 3.5rem 1.5rem 5rem; text-align: center;
+        position: relative; overflow: hidden;
     }
-    .page-header .eyebrow { color: var(--accent); }
+    .page-header::before {
+        content: ''; position: absolute;
+        width: 280px; height: 280px; border-radius: 50%;
+        background: rgba(255,255,255,.07); bottom: -80px; right: -60px;
+    }
+    .page-header-inner { position: relative; z-index: 1; }
+    .page-header .eyebrow { background: rgba(255,255,255,.18); color: #a7f3d0; border: 1px solid rgba(255,255,255,.3); padding: .3rem .9rem; border-radius:50px; font-size:.8rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; display:inline-block; margin-bottom:.6rem; }
     .page-header h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin: .4rem 0 .6rem; }
     .page-header p  { max-width: 640px; margin: 0 auto; color: rgba(255,255,255,.8); }
 
@@ -70,13 +77,15 @@
 @section('content')
 
 <section class="page-header">
-    <span class="eyebrow">Profil Sekolah</span>
-    <h1>Transparansi Dana BOS</h1>
-    <p>Informasi penggunaan Dana Bantuan Operasional Sekolah (BOS) SDN Dadapsari sebagai bentuk akuntabilitas kepada masyarakat.</p>
+    <div class="page-header-inner">
+        <span class="eyebrow">Profil Sekolah</span>
+        <h1>Transparansi Dana BOS</h1>
+        <p>Informasi penggunaan Dana Bantuan Operasional Sekolah (BOS) SDN Dadapsari sebagai bentuk akuntabilitas kepada masyarakat.</p>
+    </div>
 </section>
 
 <div class="bos-wrap">
-    <a href="{{ route('home') }}#profil" class="back-link">← Kembali ke Profil</a>
+    <a href="{{ route('profil.index') }}" class="back-link">← Kembali ke Profil</a>
 
     {{-- Info Umum --}}
     <div class="bos-card">

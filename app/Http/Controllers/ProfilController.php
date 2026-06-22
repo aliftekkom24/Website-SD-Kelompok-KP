@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 
 class ProfilController extends Controller
 {
+    public function index()
+    {
+        $setting = ProfilSetting::getData();
+        return view('Profil.index', compact('setting'));
+    }
+
     public function sejarah()
     {
         $setting = ProfilSetting::getData();

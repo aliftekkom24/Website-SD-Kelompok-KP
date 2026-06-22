@@ -6,12 +6,21 @@
 @push('styles')
 <style>
     .page-header {
+        position: relative;
         background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 55%, #2a8aa3 100%);
         color: var(--white);
         padding: 3.5rem 1.5rem 5rem;
         text-align: center;
+        overflow: hidden;
     }
-    .page-header .eyebrow { color: var(--accent); }
+    .page-header-bg {
+        position: absolute; inset: 0;
+        background-image: url('/images/sekolah-2.jpeg');
+        background-size: cover; background-position: center;
+        opacity: .15;
+    }
+    .page-header-inner { position: relative; z-index: 1; }
+    .page-header .eyebrow { background: rgba(255,255,255,.18); color: #99f6e4; border: 1px solid rgba(255,255,255,.3); padding: .3rem .9rem; border-radius:50px; font-size:.8rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; display:inline-block; margin-bottom:.6rem; }
     .page-header h1 {
         font-size: clamp(1.8rem, 4vw, 2.6rem);
         font-weight: 800;
@@ -310,15 +319,18 @@
 @section('content')
 
 <section class="page-header">
-    <span class="eyebrow">Profil Sekolah</span>
-    <h1>Fasilitas SDN Dadapsari</h1>
-    <p>Informasi lengkap ruang kelas, jumlah siswa, serta sarana dan prasarana penunjang kegiatan belajar mengajar.</p>
+    <div class="page-header-bg"></div>
+    <div class="page-header-inner">
+        <span class="eyebrow">Profil Sekolah</span>
+        <h1>Fasilitas SDN Dadapsari</h1>
+        <p>Informasi lengkap ruang kelas, jumlah siswa, serta sarana dan prasarana penunjang kegiatan belajar mengajar.</p>
+    </div>
 </section>
 
 <div class="fas-wrap">
 
     <div>
-        <a href="{{ route('home') }}#profil" class="back-link">← Kembali ke Profil</a>
+        <a href="{{ route('profil.index') }}" class="back-link">← Kembali ke Profil</a>
 
         {{-- Tab navigasi: tiap tab memuat hanya data bagian yang dipilih --}}
         <div class="fas-tabs">

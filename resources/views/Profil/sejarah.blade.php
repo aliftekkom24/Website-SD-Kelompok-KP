@@ -6,12 +6,21 @@
 @push('styles')
 <style>
     .page-header {
-        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 55%, #2a8aa3 100%);
+        position: relative;
+        background: linear-gradient(135deg, #78350f 0%, #b45309 55%, #d97706 100%);
         color: var(--white);
         padding: 3.5rem 1.5rem 5rem;
         text-align: center;
+        overflow: hidden;
     }
-    .page-header .eyebrow { color: var(--accent); }
+    .page-header-bg {
+        position: absolute; inset: 0;
+        background-image: url('/images/sekolah-1.jpeg');
+        background-size: cover; background-position: center;
+        opacity: .18;
+    }
+    .page-header-inner { position: relative; z-index: 1; }
+    .page-header .eyebrow { background: rgba(255,255,255,.18); color: #fde68a; border: 1px solid rgba(255,255,255,.3); padding: .3rem .9rem; border-radius:50px; font-size:.8rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; display:inline-block; margin-bottom:.6rem; }
     .page-header h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin: .4rem 0 .6rem; }
     .page-header p  { max-width: 620px; margin: 0 auto; color: rgba(255,255,255,.8); }
 
@@ -62,13 +71,16 @@
 @section('content')
 
 <section class="page-header">
-    <span class="eyebrow">Profil Sekolah</span>
-    <h1>Sejarah SDN Dadapsari</h1>
-    <p>Perjalanan panjang sebuah sekolah yang telah mencetak generasi penerus bangsa sejak puluhan tahun silam.</p>
+    <div class="page-header-bg"></div>
+    <div class="page-header-inner">
+        <span class="eyebrow">Profil Sekolah</span>
+        <h1>Sejarah SDN Dadapsari</h1>
+        <p>Perjalanan panjang sebuah sekolah yang telah mencetak generasi penerus bangsa sejak 1965.</p>
+    </div>
 </section>
 
 <div class="sejarah-wrap">
-    <a href="{{ route('home') }}#profil" class="back-link">← Kembali ke Profil</a>
+    <a href="{{ route('profil.index') }}" class="back-link">← Kembali ke Profil</a>
 
     <div class="sejarah-card">
 
