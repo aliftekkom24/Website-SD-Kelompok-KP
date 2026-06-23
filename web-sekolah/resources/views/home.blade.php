@@ -370,19 +370,25 @@
                     </div>
                 @endif
 
-                @if ($errors->any())
-                    <div style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;border-radius:10px;
-                                padding:.75rem 1rem;font-size:.85rem;margin-bottom:.25rem;">
-                        {{ $errors->first() }}
-                    </div>
-                @endif
+                {{-- Honeypot anti-spam: disembunyikan dari pengguna, hanya diisi bot --}}
+                <div style="position:absolute;left:-9999px;" aria-hidden="true">
+                    <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                </div>
 
                 <div class="form-row">
-                    <input type="text" name="nama" value="{{ old('nama') }}" placeholder="Nama Lengkap" required maxlength="150">
-                    <input type="email" name="email" value="{{ old('email') }}" placeholder="Alamat Email" required maxlength="191">
+                    <div>
+                        <input type="text" name="nama" value="{{ old('nama') }}" placeholder="Nama Lengkap" required maxlength="150">
+                        @error('nama') <small style="color:#b91c1c;font-size:.78rem;">{{ $message }}</small> @enderror
+                    </div>
+                    <div>
+                        <input type="email" name="email" value="{{ old('email') }}" placeholder="Alamat Email" required maxlength="191">
+                        @error('email') <small style="color:#b91c1c;font-size:.78rem;">{{ $message }}</small> @enderror
+                    </div>
                 </div>
                 <input type="text" name="subjek" value="{{ old('subjek') }}" placeholder="Subjek" maxlength="200">
+                @error('subjek') <small style="color:#b91c1c;font-size:.78rem;">{{ $message }}</small> @enderror
                 <textarea name="pesan" rows="5" placeholder="Tulis pesan Anda..." required maxlength="5000">{{ old('pesan') }}</textarea>
+                @error('pesan') <small style="color:#b91c1c;font-size:.78rem;">{{ $message }}</small> @enderror
                 <button type="submit" class="btn btn-primary">Kirim Pesan</button>
             </form>
         </div>

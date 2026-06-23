@@ -34,8 +34,10 @@ Route::middleware('redirect.admin')->group(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Form kontak publik → simpan sebagai Pesan (inbox admin)
-Route::post('kontak', [ContactController::class, 'store'])->name('kontak.store');
+// Form kontak publik → simpan sebagai Pesan (inbox admin). Throttle cegah spam.
+Route::post('kontak', [ContactController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('kontak.store');
 
 Route::prefix('profil')->name('profil.')->group(function () {
     Route::get('sejarah',              [ProfilController::class, 'sejarah'])->name('sejarah');
