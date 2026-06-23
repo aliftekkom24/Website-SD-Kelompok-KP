@@ -61,7 +61,7 @@
             </div>
 
             {{-- Akademik --}}
-            @php $akademikOpen = request()->routeIs('admin.kalender-akademik.*', 'admin.guru.*'); @endphp
+            @php $akademikOpen = request()->routeIs('admin.kurikulum.*', 'admin.kalender-akademik.*', 'admin.guru.*'); @endphp
             <button class="sidebar-link sidebar-collapse-btn" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navAkademik" aria-expanded="{{ $akademikOpen ? 'true' : 'false' }}">
                 <i class="bi bi-mortarboard-fill"></i>
@@ -70,7 +70,10 @@
             </button>
             <div class="collapse {{ $akademikOpen ? 'show' : '' }}" id="navAkademik"
                 data-bs-parent="#sidebarAccordion">
-                <a href="#" class="sidebar-link sidebar-child"><i class="bi bi-journal-text"></i> Kurikulum</a>
+                <a href="{{ route('admin.kurikulum.edit') }}"
+                    class="sidebar-link sidebar-child {{ request()->routeIs('admin.kurikulum.*') ? 'active' : '' }}">
+                    <i class="bi bi-journal-text"></i> Kurikulum
+                </a>
                 <a href="{{ route('admin.kalender-akademik.index') }}"
                     class="sidebar-link sidebar-child {{ request()->routeIs('admin.kalender-akademik.*') ? 'active' : '' }}">
                     <i class="bi bi-calendar-event-fill"></i> Kalender Akademik
