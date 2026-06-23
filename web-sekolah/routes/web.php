@@ -45,10 +45,7 @@ Route::prefix('profil')->name('profil.')->group(function () {
 });
 
 Route::prefix('akademik')->name('akademik.')->group(function () {
-    Route::get('kalender', function () {
-        // Data kalender akademik — nantinya bisa diambil dari database lewat dashboard admin.
-        return app(AkademikController::class)->kalender();
-    })->name('kalender');
+    Route::get('kalender', [AkademikController::class, 'kalender'])->name('kalender');
 
     // Konten kurikulum dikelola lewat dashboard admin (KurikulumSetting).
     Route::get('kurikulum', [AkademikController::class, 'kurikulum'])->name('kurikulum');
